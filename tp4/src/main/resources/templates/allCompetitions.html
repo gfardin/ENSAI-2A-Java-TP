@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <title>Competition List</title>
+
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css"
+        integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+</head>
+
+<body>
+    <div th:insert="~{fragments/navbar :: navbar}"></div>
+    <div class="container my-2" align="center">
+
+        <h1>Competition List</h1>
+        <table style="width:80%" border="1" class="table table-striped table-responsive-md">
+            <thead>
+                <tr>
+                    <th>Designation</th>
+                    <th>City</th>
+                    <th>Event Date</th>
+                    <th>Distance</th>
+                    <th>Max Athletes</th>
+                    <th>Action</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr th:if="${competitions.empty}">
+                    <td colspan="7">No competitions in the database</td>
+                </tr>
+                <tr th:each="c : ${competitions}">
+                    <td th:text="${c.designation}">Designation</td>
+                    <td th:text="${c.city}">City</td>
+                    <td th:text="${#temporals.format(c.eventDate, 'yyyy-MM-dd')}">Event Date</td>
+                    <td th:text="${c.distance}">Distance</td>
+                    <td th:text="${c.maxAthletes}">Max Athletes</td>
+                    <td>
+                        <div class="row">
+                            <div class="col-md-6">
+                                <a th:href="@{/competition/{id}/athletes(id=${c.id})}"
+                                    class="btn btn-primary btn-block">Athletes</a>
+                            </div>
+                            <div class="col-md-6">
+                                <a th:href="@{/competition/delete/{id}(id=${c.id})}"
+                                    class="btn btn-danger btn-block">Delete</a>
+                            </div>
+                        </div>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</body>
+
+</html>

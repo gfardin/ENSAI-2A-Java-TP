@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <title>Athlete List</title>
+
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css"
+        integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+</head>
+
+<body>
+    <div th:insert="~{fragments/navbar :: navbar}"></div>
+    <div class="container my-2" align="center">
+
+        <h1 th:text="${competition.designation} + ' - Athlete List'"> </h1>
+        <table style="width:80%" border="1" class="table table-striped table-responsive-md">
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>FirstName</th>
+                    <th>LastName</th>
+                    <th>Age</th>
+                    <th>Gender</th>
+                    <th>Action</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr th:if="${athletes.empty}">
+                    <td colspan="3">No athlete in the database</td>
+                </tr>
+                <tr th:each="p : ${athletes}">
+                    <td th:text="${p.id}">ID</td>
+                    <td th:text="${p.firstName}">FirstName/td>
+                    <td th:text="${p.lastName}">LastName</td>
+                    <td th:text="${p.age}">Age</td>
+                    <td th:text="${p.gender}">Gender</td>
+                    <td> <a th:href="@{/competition/delete/{id_comp}/athlete/{id_ath}(id_ath=${p.id}, id_comp=${competition.id})}"
+                            class="btn btn-danger">Delete</a> </td>
+                </tr>
+            </tbody>
+        </table>
+
+        <a th:href="@{/competition}" class="btn btn-primary btn-sm mb-3">Back to Competitions</a>
+
+    </div>
+</body>
+
+</html>

@@ -1,0 +1,48 @@
+server:
+  port: 9000
+
+spring:
+  application:
+    name: running
+  thymeleaf:
+    cache: false
+    enabled: true
+    prefix: classpath:/templates/
+    suffix: .html
+  datasource:
+    driver-class-name: org.h2.Driver
+    url: jdbc:h2:mem:bootapp;DB_CLOSE_DELAY=-1
+    username: sa
+    password: password
+  jpa:
+    hibernate:
+      ddl-auto: update
+    properties:
+      hibernate:
+        dialect: org.hibernate.dialect.PostgreSQLDialect
+  sql:
+    init:
+      mode: always
+      data-locations: classpath:data.sql
+logging:
+  pattern:
+    console: "%d{yyyy-MM-dd HH:mm:ss} %clr(%-5level) %clr(%-36logger{36}){cyan} %msg%n"
+  level:
+    root: ERROR
+    fr:
+      ensai: DEBUG
+    org:
+      springframework:
+        boot:
+          web:
+            embedded:
+              tomcat: INFO
+        data:
+          repository:
+            CrudRepository: DEBUG
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: "*"

@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Error Page</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+</head>
+
+<body>
+
+    <div th:insert="~{fragments/navbar :: navbar}"></div>
+
+    <div class="container mt-5">
+        <div class="alert alert-danger" role="alert">
+            <h1 class="alert-heading">Oops! An Error Occurred.</h1>
+            <p th:if="${path != null}" th:text="'Requested URI: ' + ${path}"></p>
+            <p th:if="${status != null}" th:text="'Status Code: ' + ${status}"></p>
+            <p th:if="${error != null}" th:text="'Error: ' + ${error}"></p>
+            <p th:if="${exception != null}" th:text="'Exception: ' + ${exception}"></p>
+            <p th:if="${message != null}" th:text="'Message: ' + ${message}"></p>
+        </div>
+
+        <div class="mt-4">
+            <a th:href="@{/}" class="btn btn-primary">Go to Home Page</a>
+            <button class="btn btn-secondary" onclick="window.history.back()">Go to Previous Page</button>
+        </div>
+    </div>
+
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+</body>
+
+</html>

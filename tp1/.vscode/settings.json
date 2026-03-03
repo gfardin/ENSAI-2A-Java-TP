@@ -1,0 +1,6 @@
+{
+    "editor.inlayHints.enabled": "off",
+    "editor.formatOnSave": true,
+    "java.saveActions.organizeImports": true,
+    "java.configuration.updateBuildConfiguration": "interactive"
+}

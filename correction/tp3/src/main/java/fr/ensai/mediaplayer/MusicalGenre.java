@@ -1,0 +1,26 @@
+package fr.ensai.mediaplayer;
+
+public enum MusicalGenre {
+    POP,
+    ROCK,
+    JAZZ,
+    CLASSICAL,
+    HIP_HOP,
+    ELECTRONIC,
+    COUNTRY,
+    BLUES,
+    FOLK,
+    REGGAE,
+    METAL,
+    PUNK,
+    SOUL,
+    FUNK,
+    GOSPEL,
+    LATIN,
+    TECHNO,
+    HOUSE,
+    DISCO,
+    SKA,
+    GRUNGE,
+    OPERA,
+}
