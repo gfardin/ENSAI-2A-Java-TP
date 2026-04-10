@@ -2,12 +2,13 @@ package fr.ensai.elevator;
 
 import java.util.Random;
 
-import static fr.ensai.elevator.Elevator.logger;
-
 import java.util.ArrayList;
 import java.util.List;
 
 public class CrazyElevator extends Elevator {
+
+    private static Random random = new Random();
+
     /**
      * Constructs a new CrazyElevator with the specified parameters.
      * 
@@ -30,7 +31,9 @@ public class CrazyElevator extends Elevator {
                 this.currentFloor = destinationQueue.removeFirst();
             } else if (behaviour == 1) {
                 destinationQueue.remove(0);
-                this.currentFloor = destinationQueue.removeFirst();
+                if (!destinationQueue.isEmpty()){
+                    this.currentFloor = destinationQueue.removeFirst();
+                }
             } else {
                 destinationQueue.remove(0);
             }
@@ -70,5 +73,33 @@ public class CrazyElevator extends Elevator {
         }
         return this.lastUnloaded.size();
     }
+
+    /**
+     * Loads passengers waiting on the specified floor until the elevator is full.
+     * Adds their target floors to the destination queue.
+     * If the elevator is full, send passengers to another dimension (they vanish)
+     * 
+     * @param floor the Floor where passengers board the elevator
+     */
+    public void loadPassengers(Floor floor) {
+
+        while (!this.isFull()) {
+            Person person = floor.boardNextPerson();
+            if (person == null)
+                break;
+
+            logger.info("Floor {}: {}{} enter Elevator {}",
+                    floor.getNumber(),
+                    person.getNickname(),
+                    person.getTargetFloor(),
+                    this.id);
+            this.passengers.add(person);
+            this.addDestination(person.getTargetFloor());
+        }
+        if (this.isFull()) {
+            this.passengers.clear();
+        }
+    }
+
 
 }

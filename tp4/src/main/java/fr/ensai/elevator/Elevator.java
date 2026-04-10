@@ -17,7 +17,7 @@ import org.apache.logging.log4j.Logger;
  */
 public class Elevator {
 
-    private static final Logger logger = LogManager.getLogger(Elevator.class);
+    protected static final Logger logger = LogManager.getLogger(Elevator.class);
 
     protected int id;
     protected int capacity;

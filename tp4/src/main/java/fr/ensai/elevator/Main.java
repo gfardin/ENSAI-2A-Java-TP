@@ -33,6 +33,8 @@ public class Main {
             elevators.add(new Elevator(i, 0, elevatorCapacity));
         }
 
+        elevators.add(new CrazyElevator(nbElevator, 0, elevatorCapacity));
+
 
         Hotel hotel = new Hotel(floors, elevators);
 
