@@ -47,7 +47,7 @@ public class Person {
         int nbFloor = Config.getInt("hotel.number.floor");
         int target = random.nextInt(nbFloor - 1);
         target = target + this.startFloor;
-        if (target > nbFloor) {
+        if (target >= nbFloor) {
             target = target - nbFloor;
         }
         return target;
