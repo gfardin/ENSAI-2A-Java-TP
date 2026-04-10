@@ -24,7 +24,7 @@ public class Person {
     public Person(int startFloor) {
         this.nickname = Person.generateNickname();
         this.startFloor = startFloor;
-        this.targetFloor = Person.generateTargetFloor();
+        this.targetFloor = this.generateTargetFloor();
     }
 
     /**
@@ -39,13 +39,18 @@ public class Person {
     }
 
     /**
-     * Generates a random target floor.
+     * Generates a random target floor, that must be different from the starting floor.
      * 
      * @return the target floor number
      */
-    private static int generateTargetFloor() {
+    private int generateTargetFloor() {
         int nbFloor = Config.getInt("hotel.number.floor");
-        return random.nextInt(nbFloor);
+        int target = random.nextInt(nbFloor - 1);
+        target = target + this.startFloor;
+        if (target > nbFloor) {
+            target = target - nbFloor;
+        }
+        return target;
     }
 
     public String getNickname() {
