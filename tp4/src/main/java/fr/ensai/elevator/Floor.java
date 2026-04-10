@@ -70,13 +70,33 @@ public class Floor {
     }
 
     /**
-     * Press the button to call the first elevator.
-     * Requests the first elevator to stop at this floor.
+     * Press the button to call an elevator.
+     * If an elevator is already on its way to the floor, nothing happen.
+     * Otherwise, requests the least busy elevator to stop at this floor.
      * 
      * @param elevators the list of elevators available in the hotel
      */
     public void requestElevator(List<Elevator> elevators) {
-        elevators.get(0).addDestination(this.number);
+        int min = Config.getInt("hotel.elevator.capacity") + 1;
+        int leastbusy = 0;
+        boolean coming = false;
+        int l = elevators.size();
+        for (int i = 0; i < l; i++) {
+            if (elevators.get(i).containDestination(this.number)) {
+                coming = true;
+                break;
+            }
+            else{
+                int s = elevators.get(i).getDestinationQueueSize();
+                if (s <= min) {
+                    min = s;
+                    leastbusy = i;
+                }
+            }
+        }
+        if (!coming) {
+            elevators.get(leastbusy).addDestination(this.number);
+        }
     }
 
     /**
